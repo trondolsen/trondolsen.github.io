@@ -50,7 +50,7 @@
         query('.navbar').prop('scrollHeight', (value) => dom(browser.document.body).attr('padding-top', () => value + "px"));
         query('.navbar').prop('scrollHeight', (value) => query('#alerts').attr('padding-top', () => value + "px"));
       })
-      .event('ontouchend', () => {
+      .event('touchend', () => {
         layoutGrid(query('#checks'), query('.card'));
         query('.navbar').prop('scrollHeight', (value) => dom(browser.document.body).attr('padding-top', () => value + "px"));
         query('.navbar').prop('scrollHeight', (value) => query('#alerts').attr('padding-top', () => value + "px"));
@@ -62,7 +62,7 @@
         query('.navbar').prop('scrollHeight', (value) => dom(browser.document.body).attr('padding-top', () => value + "px"));
         query('.navbar').prop('scrollHeight', (value) => query('#alerts').attr('padding-top', () => value + "px"));
       })
-      .event('ontouchend', () => {
+      .event('touchend', () => {
         layoutGrid(query('#checks'), query('.card'));
         query('.navbar').prop('scrollHeight', (value) => dom(browser.document.body).attr('padding-top', () => value + "px"));
         query('.navbar').prop('scrollHeight', (value) => query('#alerts').attr('padding-top', () => value + "px"));
