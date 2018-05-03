@@ -1,0 +1,135 @@
+
+body {
+  overflow: hidden;
+}
+
+#workspace {
+  position: relative;
+  float: left;
+  left: -10000px;
+  top: -10000px;
+  width: 20000px;
+  height: 20000px;
+  background-image: url("workbench.png");
+  background-attachment: scroll;
+}
+
+#debug-console {
+  position: absolute;
+  float: left;
+  width: 350px;
+  max-width: 350px;
+  height: 350px;
+  max-height: 350px;
+  background: #ffc226;
+  opacity: 0.75;
+  color: #282828;
+  display: none;
+  border-radius: 8px;
+  padding: 2px;
+  z-index: -1;
+  font-family: monospace;
+  font-size: 12px;
+  white-space: pre;
+}
+
+.node {
+  position: absolute;
+  max-width: 450px;
+  float: left;
+  color: #f0f0f0;
+  font-family: Tahoma;
+  font-size: 14px;
+  padding: 2px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 4px;
+  background-color: #4060A0;
+  box-shadow: 0px 0px 2px rgba(190, 190, 190, 0.75);
+  left: 0px;
+  top: 0px;
+  white-space: nowrap;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.node .label {
+  clear: both;
+}
+
+.node .controls {
+  clear: both;
+  color: #273a61;
+}
+
+.node .controls .control {
+  float: left;
+  margin: 0 2px;
+  padding: 0 4px;
+  color: #7A95CC;
+  border-radius: 8px;
+  box-shadow: 0 0 1px #7A95CC;
+}
+
+.node .controls .control.clear {
+  clear: both;
+}
+
+.node .controls .control .search {
+  margin: 0px 0px;
+  padding: 0px 0px;
+  border-radius: 8px;
+  border: 0 none;
+  max-width: 80px;
+  color: #8AA8E6;
+  background-color: transparent;
+  font-family: Tahoma;
+  font-size: 14px;
+}
+
+.node .item {
+  float: left;
+  margin-left: 8px;
+  color: #8aa8e6;
+  white-space: normal;
+  margin: 0px 4px;
+  padding: 1px 2px;
+}
+
+.node .item:hover {
+  color: #b8c7e6;
+}
+
+.node .hidden {
+  display: none;
+}
+
+.node .item.expanded {
+  clear: both;
+  float: none;
+}
+
+.node .item.expanded:hover {
+  color: #b8c7e6;
+  background-color: #4c73bf;
+}
+
+.node .item.expanded .detail {
+  color: #303E59;
+}
+
+.node.empty {
+  background-color: #a04040;
+}
+
+.node:hover {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
