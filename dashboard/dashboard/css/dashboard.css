@@ -93,13 +93,18 @@ body {
 }
 
 .checks .progress .progress-bar {
+  position: relative;
   background-color: #83d383 !important;
   font-size: 0.55rem;
 }
 
+.checks .progress .progress-bar.warn {
+  position: relative;
+  font-size: 0.55rem;
+}
+
 .checks .card .card-title {
-  font-family: 'Roboto', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.87rem;
 }
 
 .checks .card .data-table .progress {
@@ -141,7 +146,6 @@ body {
   background-color: #3d4a57;
   color: #ffffff;
   font-size: 1.25rem;
-  font-family: 'Roboto', sans-serif;
 }
 
 .topbar .icon {

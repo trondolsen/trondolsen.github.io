@@ -37,7 +37,23 @@
       requestInit: {cache: 'no-cache', mode: 'same-origin', credentials: 'same-origin'},
       sources: [
         {name: 'ExampleData', checks: {url: 'ExampleChecks.xml'}, availability: {url: 'ExampleAvailabilty.xml'}}
-      ]
+      ],
+      checkPriorities: {
+        'default': 1,
+        'Citrix XenApp': 1,
+        'CPU': 1,
+        'DNS': 1,
+        'Event Log': 1,
+        'Event Log (Classic)': 1,
+        'HTTP(s)': 1,
+        'ICMP': 1,
+        'Memory': 1,
+        'MS SQL Server': 1,
+        'Powershell': 1,
+        'Service': 1,
+        'SMTP': 1,
+        'SNMP Get': 1
+      }
     }
   };
   const data = {folders: {}, checks: []};
@@ -209,18 +225,26 @@
         result:         elem.query('result').text(),
         data:           elem.query('data').text(),
         type:           elem.query('type').text(),
-        uptime:         '0.00',
         successPct:     '0.00',
         failurePct:     '0.00',
         uncertainPct:   '0.00',
-        maintenancePct: '0.00'
+        maintenancePct: '0.00',
+        notprocessedPct:'0.00',
+        success:        '0.00',
+        failure:        '0.00',
+        priority:         config.datasource.checkPriorities['default'],
       };
+
+      // Assign priority for check type
+      if (config.datasource.checkPriorities[check.type] !== undefined) {
+        check.priority = config.datasource.checkPriorities[check.type];
+      }
 
       // Append check to given folder
       if (check.folder.toLowerCase().startsWith(config.ignoreFolderName) === false) {
         data.checks.push(check);
         if (data.folders[check.folder] === undefined) {
-          data.folders[check.folder] = { name: check.folder, checks: [], uptime: '0.00' };
+          data.folders[check.folder] = { name: check.folder, checks: [], success: '100.00', warning: '0.00', error: '0.00' };
         }
         data.folders[check.folder].checks.push(check);
       }
@@ -250,7 +274,7 @@
       return sum;
     }, {});
 
-    // Assign least uptime to folder
+    // Assign average success to folder
     dom(xml).query('monitor').query('check').each((elem) => {
       const id = elem.query('id').text();
       if (checksById[id] !== undefined) {
@@ -259,37 +283,31 @@
         check.failurePct = elem.query('failure-pct').text().slice(0,-1);
         check.uncertainPct = elem.query('uncertain-pct').text().slice(0,-1);
         check.maintenancePct = elem.query('maintenance-pct').text().slice(0,-1);
-        check.uptime = check.successPct;
+        check.notprocessedPct = elem.query('notprocessed-pct').text().slice(0,-1);
+        check.success = ((fromFloat(check.successPct) * 10 + fromFloat(check.uncertainPct) * 10 + fromFloat(check.maintenancePct) * 10 + fromFloat(check.notprocessedPct) * 10) / 10).toFixed(2);
+        check.failure = check.failurePct;
         query('#' + stringify(check.folder) + '_' + check.id)
-          .prop('title', () => `Host: ${check.host}\nSuccess: ${check.successPct}%\nFailure: ${check.failurePct}%\nUncertain: ${check.uncertainPct}%\nMaintenance: ${check.maintenancePct}%\nCheck: ${check.type}\nResult: ${check.result}\n\n${check.explanation}`);
+          .prop('title', () => `Host: ${check.host}\nSuccess: ${check.successPct}%\nFailure: ${check.failurePct}%\nUncertain: ${check.uncertainPct}%\nMaintenance: ${check.maintenancePct}%\nNot Processed: ${check.notprocessedPct}%\nType: ${check.type}\nPriority: ${check.priority}\nResult: ${check.result}\n\n${check.explanation}`);
       }
     });
-    
-    // Assign each folder its checks lowest availability
+
     for (const folder of Object.values(data.folders)) {
       const checks = folder.checks.filter(check => check.result !== 'On Hold');
-      const percent = checks.reduce(
-        (sum, check) => {
-          const a = fromFloat(sum);
-          const b = fromFloat(check.uptime);
-          if (a < b) {
-            return sum;
-          }
-          return check.uptime;
-        },
-        "100.00"
-      );
-      folder.uptime = percent;
+      const sum = checks.reduce((sum, check) => sum + fromFloat(check.success) * check.priority, 0.00);
+      if (sum > 0.0) {
+        const priorities = checks.reduce((sum, check) => sum + check.priority, 0.00);
+        folder.success = (sum / priorities).toFixed(2);
+      }
     }
   }
 
   function showAvailability(datasource) {
     for (const folder of Object.values(data.folders)) {
-      folder.htmlUptime.empty();
-      folder.htmlUptime
+      folder.htmlStatus
+        .empty()
         .append(
-          div({attrs:{width: folder.uptime + '%'}, css: ['progress-bar']})
-            .append(span({props: {textContent: `${folder.uptime} % (last ${datasource.availability.spanInDays} days)`}}))
+          div({attrs:{width: folder.success + '%'}, css: ['progress-bar']})
+            .append(span({props: {textContent: `${folder.success} % (last ${datasource.availability.spanInDays} days)`}}))
         );
     }
   }
@@ -332,7 +350,8 @@
 
   function showFolder(folder, result) {
     const html = div({props:{id: stringify(folder.name)}, css:['item','card','mx-2','my-2']});
-    folder.htmlUptime = div({css:['progress', 'uptime']});
+
+    folder.htmlStatus = div({css:['progress', 'uptime']});
 
     if (result === "Ok") { html.css({add:['bg-success']}); }
     else if (result === "Error") { html.css({add:['bg-danger']}); }
@@ -347,7 +366,7 @@
       return sum;
     }, {});
 
-    const htmlData = div({css:['data-table']});
+     const htmlData = div({css:['data-table']});
 
     for (const [name,checks] of Object.entries(byType)) {
       for (const check of Object.values(checks)) {
@@ -358,7 +377,7 @@
     html.append(
       div({css:['card-body','mx-1','my-1','px-1','py-0']})
         .append(div({props:{textContent: folder.name}, css: ['card-title','my-1']}))
-        .append(folder.htmlUptime)
+        .append(folder.htmlStatus)
         .append(htmlData)
     );
     folder.html = html;
@@ -395,8 +414,8 @@
       showProgress(String(check.data), check.result, html, check.id);
     }
     else if (key === 'Memory Usage') {
-      const minMem = parseFloat(extractText(check.explanation, 'minimum required=[', ' '));
-      const freeMem = parseFloat(check.data);
+      const minMem = fromFloat(extractText(check.explanation, 'minimum required=[', ' '));
+      const freeMem = fromFloat(check.data);
       const value = freeMem < minMem ? 100.0 : (1.0 / (freeMem / minMem)) * 100.0;
       showProgress(value.toFixed(0), check.result, html, check.id);
     }
@@ -413,7 +432,7 @@
         props: {
           id: stringify(check.folder) + '_' + check.id,
           textContent: host,
-          title:`Host: ${check.host}\nSuccess: ${check.successPct}\nCheck: ${check.type}\nResult: ${check.result}\n\n${check.explanation}`
+          title:`Host: ${check.host}\nSuccess: ${check.successPct}\nType: ${check.type}\nPriority: ${check.priority}\nResult: ${check.result}\n\n${check.explanation}`
         },
         datas:{'id': check.id}
       })
