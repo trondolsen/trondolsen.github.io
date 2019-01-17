@@ -27,7 +27,7 @@
 
   const config = {
     title: 'Applications',
-    searchFilter: '',
+    searchFilters: [],
     ignoreFolderName: '\\_',
     clearConsoleInMinutes: 30,
     layout: {columnWidth: { name: 17, host: 18, detail: 19 }},
@@ -36,7 +36,7 @@
       insyncInMinutes: 5,
       requestInit: {cache: 'no-cache', mode: 'same-origin', credentials: 'same-origin'},
       sources: [
-        {name: 'ExampleData', checks: {url: 'ExampleChecks.xml'}, availability: {url: 'ExampleAvailabilty.xml'}}
+        {name: 'ExampleData', enabled: true, checks: {url: 'ExampleChecks.xml'}, availability: {url: 'ExampleAvailabilty.xml'}}
       ],
       checkRating: {
         'default': 1,
@@ -59,6 +59,26 @@
   const data = {folders: {}, checks: []};
 
   const applyConfig = () => new Promise((resolve) => {
+    // Handle URL parameters
+    var searchParams = new URLSearchParams(browser.window.location.search);
+    if (searchParams.has('search')) {
+      config.searchFilters = searchParams.get('search').split(',').map(item => item.toLowerCase());
+      query('.navbar .searchbar .form-control').prop('value', () => config.searchFilters.join(','));
+      browser.console.info(`Searching for ${config.searchFilters.join(',')}`);
+    }
+    if (searchParams.has('datasources')) {
+      const datasourcesParams = searchParams.get('datasources').split(',');
+      config.datasource.sources.forEach((source) => {
+        source.enabled = false;
+        datasourcesParams.forEach((sourceParam) => {
+           if (source.name.toLowerCase() === sourceParam.toLowerCase()) {
+            source.enabled = true;
+          }
+        });
+      });
+      browser.console.info(`Enabling datasources ${datasourcesParams.join(',')}`);
+     }
+
     // Handle grid layout resizing
     dom(browser)
       .event('resize', () => {
@@ -78,11 +98,14 @@
     query('.navbar .topbar .text').text(config.title);
     dom(browser.document).prop('title', () => config.title);
 
-    // Handle search text
+    // Handle search text. Search terms separated by comma.
     query('.navbar .searchbar .form-control')
       .event('keyup', (event) => {
         browser.scrollTop = 0;
-        config.searchFilter = event.target.value.toLowerCase();
+        config.searchFilters = [];
+        if (event.target.value.length > 0) {
+          config.searchFilters = event.target.value.split(',').filter(item => item !== '').map(item => item.toLowerCase());
+        }
         filterChecks();
         layoutGrid(query('#checks'), query('.card'));
       })
@@ -95,16 +118,32 @@
     // Show datasources
     for (const source of config.datasource.sources) {
       query('#datasources')
-        .append(span({props: {id: 'ds-' + source.name}, css: ['datasource']})
-          .append(span({props: {textContent: ''}, css: ['icon','mx-1']}))
-          .append(span({props: {textContent: source.name, title: `${source.checks.url}\n${source.availability.url}`}, css: ['text','datasource-tooltip']}))
-      );
+        .append(
+          span({props: {id: 'ds-' + source.name}, css: ['datasource']})
+            .append(span({props: {textContent: ''}, css: ['icon','mx-1']}))
+            .append(span({props: {textContent: source.name, title: `${source.checks.url}\n${source.availability.url}`}, css: ['text','datasource-tooltip']}))
+            .event('click', () => {
+              if (source.enabled) {
+                source.enabled = false;
+                query('#ds-' + source.name)
+                  .css({add: ['disabled']});
+                }
+              else {
+                source.enabled = true;
+                query('#ds-' + source.name)
+                  .css({remove: ['disabled']});
+              }
+              filterChecks();
+              layoutGrid(query('#checks'), query('.card'));
+          })
+        );
     }
 
     // Repeated fetching of datasources
     const fetchSources = () => {
+      const sources = config.datasource.sources.filter((source) => source.enabled);
       Promise.all(
-        config.datasource.sources.map(async (source) => {
+        sources.map(async (source) => {
           try {
             const checksData = fetchText(source.name, source.checks.url, config.datasource.requestInit);
             const availabilityData = fetchText(source.name, source.availability.url, config.datasource.requestInit);
@@ -139,39 +178,40 @@
     });
 
   function filterChecks() {
-    if (config.searchFilter.length > 0 ) {
-      // Apply search filter on folders
-      for (const folder of Object.values(data.folders)) {
-        const html = query('#' + stringify(folder.name));
-        if (folder.name.toLowerCase().includes(config.searchFilter)) {
-          html.css({remove:['remove']});
-          for (const check of folder.checks) {
-            html.query(`div [data-id="${check.id}"]`).css({remove:['hide']});
-          }
-        }
-        else {
-          // Apply search filter on checks
-          html.css({add:['remove']});
-          for (const check of folder.checks) {
-            if (check.explanation.toLowerCase().includes(config.searchFilter) || check.type.toLowerCase().includes(config.searchFilter) || check.host.toLowerCase().includes(config.searchFilter)) {
-              html.css({remove:['remove']});
-              html.query(`div [data-id="${check.id}"]`).css({remove:['hide']});
-            }
-            else {
-              html.query(`div [data-id="${check.id}"]`).css({add:['hide']});
-            }
-          }
-        }
-      }
-    }
-    else {
-      // Unapply search filter on all folders and checks
-      for (const folder of Object.values(data.folders)) {
-        const html = query('#' + stringify(folder.name));
+    // Apply search filter on folders
+    for (const folder of Object.values(data.folders)) {
+      const html = query('#' + stringify(folder.name));
+      // Apply search filter on folder name (also true if no search filter is given)
+      const folderTest = config.searchFilters.length === 0 ? true : config.searchFilters.reduce(
+        (sum,item) => item.split('+').reduce((sum2,item2) => folder.name.toLowerCase().includes(item2) && sum2, true) || sum, false
+      );
+      if (folderTest) {
         html.css({remove:['remove']});
         for (const check of folder.checks) {
           html.query(`div [data-id="${check.id}"]`).css({remove:['hide']});
         }
+      }
+      else {
+        // Apply search filter on checks (also true if no search filter is given)
+        html.css({add:['remove']});
+        for (const check of folder.checks) {
+          const checkText = check.explanation.toLowerCase() + check.type.toLowerCase() + check.host.toLowerCase();
+          const checkTest = config.searchFilters.length === 0 ? true : config.searchFilters.reduce(
+            (sum,item) => item.split('+').reduce((sum2,item2) => checkText.includes(item2) && sum2, true) || sum, false
+          );
+          if (checkTest) {
+            html.css({remove:['remove']});
+            html.query(`div [data-id="${check.id}"]`).css({remove:['hide']});
+          }
+          else {
+            html.query(`div [data-id="${check.id}"]`).css({add:['hide']});
+          }
+        }
+      }
+
+      // Hide folders where all checks are from disabled datasources
+      if (folder.checks.every(item => item.datasource.enabled === false)) {
+        html.css({add:['remove']});
       }
     }
   }
@@ -343,10 +383,10 @@
     if (byStatus['Onhold']) { showFolders(byStatus['Onhold'], 'Onhold'); }
   }
 
-  function showFolders(folders, result) {
+  function showFolders(folders, result) { 
     for (const folder of Object.values(folders)) {
-      showFolder(folder, result);
-    }
+       showFolder(folder, result);
+     }
   }
 
   function showFolder(folder, result) {
