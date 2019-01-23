@@ -16,28 +16,6 @@
   </check>
   <check>
     <comments></comments>
-    <id>10084</id>
-    <displayname>SRV01.domain - Service</displayname>
-    <host>SRV01.domain</host>
-    <explanation>Service [Service] has state: [Running]</explanation>
-    <folder>\SRV\Application 3</folder>
-    <result>Successful</result>
-    <type>Service</type>
-    <data></data>
-  </check>
-  <check>
-    <comments></comments>
-    <id>10086</id>
-    <displayname>SRV01.domain - Service</displayname>
-    <host>SRV01.domain</host>
-    <explanation>Service [Service] has state: [Running]</explanation>
-    <folder>\SRV\Application 3</folder>
-    <result>Successful</result>
-    <type>Service</type>
-    <data></data>
-  </check>
-  <check>
-    <comments></comments>
     <id>10087</id>
     <displayname>SRV01.domain - Service</displayname>
     <host>SRV01.domain</host>
@@ -120,7 +98,7 @@
     <host>SRV01.domain</host>
     <explanation>Web site available, text pattern found in page</explanation>
     <folder>\SRV\Application 3</folder>
-    <result>Successful</result>
+    <result>Uncertain</result>
     <type>HTTP/HTTPs</type>
     <data>16</data>
   </check>
@@ -411,17 +389,6 @@
     <data>0</data>
   </check>
   <check>
-    <comments>Down for 10d 13h</comments>
-    <id>10700</id>
-    <displayname>SRV01.domain - Event Log MSSQLSERVER</displayname>
-    <host>SRV01.domain</host>
-    <explanation>Event found (131 events matched)</explanation>
-    <folder>\SRV\Database</folder>
-    <result>Failed</result>
-    <type>Event Log</type>
-    <data>131</data>
-  </check>
-  <check>
     <comments></comments>
     <id>10704</id>
     <displayname>SRV01.domain - Microsoft SQL Server 2014</displayname>
@@ -532,17 +499,6 @@
     <data></data>
   </check>
   <check>
-    <comments></comments>
-    <id>10525</id>
-    <displayname>domain.com - HTTP(s)</displayname>
-    <host>domain.com</host>
-    <explanation>Web site available, text pattern found in page</explanation>
-    <folder>\SRV\Application 1</folder>
-    <result>Failed</result>
-    <type>HTTP/HTTPs</type>
-    <data>31</data>
-  </check>
-  <check>
     <comments>Down for 10d 13h</comments>
     <id>10703</id>
     <displayname>SRV01.domain - Event Log MSSQLSERVER</displayname>
@@ -574,17 +530,6 @@
     <result>Successful</result>
     <type>DNS</type>
     <data>Not monitored</data>
-  </check>
-  <check>
-    <comments></comments>
-    <id>10581</id>
-    <displayname>SRV01.domain - TCP/IP port 8530</displayname>
-    <host>SRV01.domain</host>
-    <explanation>Server is available</explanation>
-    <folder>\SRV\WSUS</folder>
-    <result>Successful</result>
-    <type>TCP/IP</type>
-    <data>15</data>
   </check>
   <check>
     <comments></comments>
@@ -727,17 +672,6 @@
     <folder>\SRV\SCCM</folder>
     <result>Successful</result>
     <type>MS IIS Server</type>
-    <data></data>
-  </check>
-  <check>
-    <comments></comments>
-    <id>10637</id>
-    <displayname>SRV01.domain - Service &apos;WsusService&apos;</displayname>
-    <host>SRV01.domain</host>
-    <explanation>Service [WSUS Service] has state: [Running]</explanation>
-    <folder>\SRV\SCCM</folder>
-    <result>Successful</result>
-    <type>Service</type>
     <data></data>
   </check>
   <check>

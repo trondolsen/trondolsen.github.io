@@ -1,7 +1,7 @@
 /***
  * Dashboard for ActiveExperts
  *
- * Copyright (c) 2017-2018 Trond Olsen
+ * Copyright (c) 2017-2019 Trond Olsen
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,8 @@
       insyncInMinutes: 5,
       requestInit: {cache: 'no-cache', mode: 'same-origin', credentials: 'same-origin'},
       sources: [
-        {name: 'ExampleData', enabled: true, checks: {url: 'ExampleChecks.xml'}, availability: {url: 'ExampleAvailabilty.xml'}}
+        {name: 'Example1', enabled: true, checks: {url: 'ExampleChecks1.xml'}, availability: {url: 'ExampleAvailabilty1.xml'}},
+        {name: 'Example2', enabled: true, checks: {url: 'ExampleChecks2.xml'}, availability: {url: 'ExampleAvailabilty2.xml'}}
       ],
       checkRating: {
         'default': 1,
@@ -62,12 +63,12 @@
     // Handle URL parameters
     var searchParams = new URLSearchParams(browser.window.location.search);
     if (searchParams.has('search')) {
-      config.searchFilters = searchParams.get('search').split(',').map(item => item.toLowerCase());
+      config.searchFilters = searchParams.get('search').split(',').map(param => param.replace(' ','+').toLowerCase());
       query('.navbar .searchbar .form-control').prop('value', () => config.searchFilters.join(','));
       browser.console.info(`Searching for ${config.searchFilters.join(',')}`);
     }
-    if (searchParams.has('datasources')) {
-      const datasourcesParams = searchParams.get('datasources').split(',');
+    if (searchParams.has('datasource')) {
+      const datasourcesParams = searchParams.get('datasource').split(',');
       config.datasource.sources.forEach((source) => {
         source.enabled = false;
         datasourcesParams.forEach((sourceParam) => {
@@ -94,17 +95,17 @@
         query('.navbar').prop('scrollHeight', (value) => query('#alerts').attr('padding-top', () => value + "px"));
       });
 
-    // Set title
+    // Change title
     query('.navbar .topbar .text').text(config.title);
     dom(browser.document).prop('title', () => config.title);
 
-    // Handle search text. Search terms separated by comma.
+    // Handle search input. Search terms separated by comma.
     query('.navbar .searchbar .form-control')
       .event('keyup', (event) => {
         browser.scrollTop = 0;
         config.searchFilters = [];
         if (event.target.value.length > 0) {
-          config.searchFilters = event.target.value.split(',').filter(item => item !== '').map(item => item.toLowerCase());
+          config.searchFilters = event.target.value.split(',').filter(filter => filter !== '').map(filter => filter.toLowerCase());
         }
         filterChecks();
         layoutGrid(query('#checks'), query('.card'));
@@ -123,27 +124,22 @@
             .append(span({props: {textContent: ''}, css: ['icon','mx-1']}))
             .append(span({props: {textContent: source.name, title: `${source.checks.url}\n${source.availability.url}`}, css: ['text','datasource-tooltip']}))
             .event('click', () => {
-              if (source.enabled) {
-                source.enabled = false;
-                query('#ds-' + source.name)
-                  .css({add: ['disabled']});
-                }
-              else {
-                source.enabled = true;
-                query('#ds-' + source.name)
-                  .css({remove: ['disabled']});
-              }
-              filterChecks();
+              // Enable or disable datasource
+              source.enabled = !source.enabled;
+              showChecks();
               layoutGrid(query('#checks'), query('.card'));
+              filterChecks();
+              updateAvailability();
+              config.datasource.sources.filter(source => source.enabled).forEach(source => showAvailability(source));
+              updateStatus();
           })
         );
     }
 
     // Repeated fetching of datasources
     const fetchSources = () => {
-      const sources = config.datasource.sources.filter((source) => source.enabled);
       Promise.all(
-        sources.map(async (source) => {
+        config.datasource.sources.map(async (source) => {
           try {
             const checksData = fetchText(source.name, source.checks.url, config.datasource.requestInit);
             const availabilityData = fetchText(source.name, source.availability.url, config.datasource.requestInit);
@@ -152,6 +148,7 @@
             layoutGrid(query('#checks'), query('.card'));
             filterChecks();
             readAvailability(parseXml(await availabilityData), source);
+            updateAvailability();
             showAvailability(source);
           }
           catch (reason) {
@@ -178,6 +175,18 @@
     });
 
   function filterChecks() {
+    // Handle disabled datasources
+    for (const source of config.datasource.sources) {
+      if (source.enabled) {
+        query('#ds-' + source.name)
+          .css({remove: ['disabled']});
+        }
+      else {
+        query('#ds-' + source.name)
+          .css({add: ['disabled']});
+      }
+    }
+
     // Apply search filter on folders
     for (const folder of Object.values(data.folders)) {
       const html = query('#' + stringify(folder.name));
@@ -209,7 +218,7 @@
         }
       }
 
-      // Hide folders where all checks are from disabled datasources
+      // Hide folder where all checks are from disabled datasources
       if (folder.checks.every(item => item.datasource.enabled === false)) {
         html.css({add:['remove']});
       }
@@ -331,10 +340,12 @@
           .prop('title', () => `Host: ${check.host}\nSuccess: ${check.successPct}%\nFailure: ${check.failurePct}%\nUncertain: ${check.uncertainPct}%\nMaintenance: ${check.maintenancePct}%\nNot Processed: ${check.notprocessedPct}%\nType: ${check.type}\nRating: ${check.rating}\nResult: ${check.result}\n\n${check.explanation}`);
       }
     });
+  }
 
+  function updateAvailability() {
     for (const folder of Object.values(data.folders)) {
-      const checks = folder.checks.filter(check => check.result !== 'On Hold' || check.result !== 'Maintenance');
-      const sum = checks.reduce((sum, check) => sum + fromFloat(check.success) * check.rating, 0.00);
+      const checks = folder.checks.filter(check => check.datasource.enabled).filter(check => check.result !== 'On Hold' || check.result !== 'Maintenance');
+      const sum = checks.reduce((sum,check) => sum + fromFloat(check.success) * check.rating, 0.00);
       if (sum > 0.0) {
         const ratings = checks.reduce((sum, check) => sum + check.rating, 0.00);
         folder.success = (sum / ratings).toFixed(2);
@@ -352,31 +363,43 @@
         );
     }
   }
+
+  function updateStatus() {
+    // Group folders by checks result
+    const byStatus = Object.values(data.folders).reduce(
+      (sum,folder) => {
+        if(folder.checks.every(check => check.result === 'On Hold' || check.result === 'Maintenance')) {
+          sum['Onhold'].push(folder);
+        }
+        else if (folder.checks.every(check => check.result === 'Successful' || check.result === 'Uncertain' || check.result === 'On Hold' || check.result === 'Maintenance') ) {
+          sum['Ok'].push(folder);
+        }
+        else if (folder.checks.every(check => check.result === 'Failed')) {
+          sum['Error'].push(folder); 
+        }
+        else {
+          sum['Warning'].push(folder);
+        }
+        return sum;
+      },
+      {'Ok':[], 'Warning': [], 'Error':[], 'Onhold': []}
+    );
+
+    const okText = byStatus['Ok'].filter(folder => folder.checks.find(item => item.datasource.enabled)).length;
+    const warnText = byStatus['Warning'].filter(folder => folder.checks.find(item => item.datasource.enabled)).length;
+    const errorText = byStatus['Error'].filter(folder => folder.checks.find(item => item.datasource.enabled)).length;
+
+    byStatus['Ok'] ? query('#statusUpText').text(okText) : query('#statusUpText').text('0');
+    byStatus['Warning'] ? query('#statusWarnText').text(warnText) : query('#statusWarnText').text('0');
+    byStatus['Error'] ? query('#statusDownText').text(errorText) : query('#statusDownText').text('0');
+
+    return byStatus;
+  }
   
   function showChecks() {
     query('#checks').empty();
-    
-    // Group folders by checks result
-    const byStatus = Object.values(data.folders).reduce((sum,folder) => {
-      if(folder.checks.every(check => check.result === 'On Hold' || check.result === 'Maintenance')) {
-        sum['Onhold'].push(folder);
-      }
-      else if (folder.checks.every(check => check.result === 'Successful' || check.result === 'Uncertain' || check.result === 'On Hold' || check.result === 'Maintenance') ) {
-        sum['Ok'].push(folder);
-      }
-      else if (folder.checks.every(check => check.result === 'Failed')) {
-        sum['Error'].push(folder); 
-      }
-      else {
-        sum['Warning'].push(folder);
-      }
-      return sum;
-    }, {'Ok':[], 'Warning': [], 'Error':[], 'Onhold': []});
-    
-    byStatus['Ok'] ? query('#statusUpText').text(byStatus['Ok'].length) : query('#statusUpText').text('0');
-    byStatus['Warning'] ? query('#statusWarnText').text(byStatus['Warning'].length) : query('#statusWarnText').text('0');
-    byStatus['Error'] ? query('#statusDownText').text(byStatus['Error'].length) : query('#statusDownText').text('0');
-
+  
+    const byStatus = updateStatus();
     if (byStatus['Error']) { showFolders(byStatus['Error'], 'Error'); }
     if (byStatus['Warning']) { showFolders(byStatus['Warning'], 'Warning'); }
     if (byStatus['Ok']) { showFolders(byStatus['Ok'], 'Ok'); }
@@ -410,7 +433,7 @@
      const htmlData = div({css:['data-table']});
 
     for (const [name,checks] of Object.entries(byType)) {
-      for (const check of Object.values(checks)) {
+      for (const check of Object.values(checks.filter(check => check.datasource.enabled))) {
         showCheck(check, name, htmlData);
       }
     }
@@ -437,7 +460,7 @@
       htmlStatus.text('');
     }
     else if (check.result === 'Uncertain') {
-      htmlStatus.text('');
+      htmlStatus.text('');
     }
     else if (check.result === 'On Hold') {
       htmlStatus.text('');
