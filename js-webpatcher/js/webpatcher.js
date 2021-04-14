@@ -4,12 +4,12 @@
  * Licensed under MIT
  */
 
-((browser, ElementSeq, SynthFader, SynthSlider, SynthStepRotary, SynthIntervalRotary, SynthRotary, SynthButton, SynthSwitch, SynthFlipSwitch, SynthPitchBender, SynthKeyboard, Midi) => {
+((browser, ElementSeq, SynthFader, SynthSlider, SynthSteppedRotary, SynthIntervalRotary, SynthFreeRotary, SynthButton, SynthSwitch, SynthFlipSwitch, SynthPitchBender, SynthKeyboard, Midi) => {
   'use strict';
 
   const config = {
     title: 'Applications',
-    color: 'blue',
+    color: 'classic',
     mouse: {
       sensitivity: 100.0
     },
@@ -33,7 +33,7 @@
 
     // Create Synth controls
     var synth = {
-      lfo1Waveform: new SynthStepRotary(query('.synth-lfo1-waveform')),
+      lfo1Waveform: new SynthSteppedRotary(query('.synth-lfo1-waveform')),
       lfo1Rate: new SynthFader(query('.synth-lfo1-rate')),
       lfo1Delay: new SynthFader(query('.synth-lfo1-delay')),
       lfo1Lrphase: new SynthFader(query('.synth-lfo1-lrphase')),
@@ -46,10 +46,10 @@
       ddsmodPwm: new SynthFader(query('.synth-ddsmod-pwm')),
       ddsmodPwmsource: new SynthSwitch(query('.synth-ddsmod-pwmsource')),
       ddsmodCrossmod: new SynthFader(query('.synth-ddsmod-crossmod')),
-      dds1Waveform: new SynthStepRotary(query('.synth-dds1-waveform')),
-      dds1Range: new SynthStepRotary(query('.synth-dds1-range')),
-      dds2Waveform: new SynthStepRotary(query('.synth-dds2-waveform')),
-      dds2Range: new SynthStepRotary(query('.synth-dds2-range')),
+      dds1Waveform: new SynthSteppedRotary(query('.synth-dds1-waveform')),
+      dds1Range: new SynthSteppedRotary(query('.synth-dds1-range')),
+      dds2Waveform: new SynthSteppedRotary(query('.synth-dds2-waveform')),
+      dds2Range: new SynthSteppedRotary(query('.synth-dds2-range')),
       dds2Tune: new SynthIntervalRotary(query('.synth-dds2-tune')),
       dds2Mode: new SynthSwitch(query('.synth-dds2-mode')),
       mixerMix: new SynthIntervalRotary(query('.synth-mixer-mix')),
@@ -99,7 +99,7 @@
       seqOn: new SynthButton(query('.synth-seq-on')),
       seqHold: new SynthButton(query('.synth-seq-hold')),
       seqSeqrec: new SynthButton(query('.synth-seq-seqrec')),
-      modAmount: new SynthRotary(query('.synth-mod-amount')),
+      modAmount: new SynthFreeRotary(query('.synth-mod-amount')),
       modModassign: new SynthButton(query('.synth-mod-modassign')),
       mod1: new SynthButton(query('.synth-mod-1')),
       mod2: new SynthButton(query('.synth-mod-2')),
@@ -186,8 +186,8 @@
         mouseTracking.dy = event.clientY - mouseTracking.y;
         mouseTracking.x = event.clientX;
         mouseTracking.y = event.clientY;
-        mouseTracking.dxInVw = (config.mouse.sensitivity * mouseTracking.dx) / window.innerHeight;
-        mouseTracking.dyInVw = (config.mouse.sensitivity * mouseTracking.dy) / window.innerWidth;
+        mouseTracking.dxInVw = (config.mouse.sensitivity * mouseTracking.dx) / window.innerWidth;
+        mouseTracking.dyInVw = (config.mouse.sensitivity * mouseTracking.dy) / window.innerHeight;
         synthControl.updateValue(mouseTracking.dxInVw, mouseTracking.dyInVw);
       };
       var fn = (event) => {
@@ -393,32 +393,33 @@
     var onMidiMessage = (event) => {
       var ccChannelMsg = Midi.ccChannelMessage[event.data[0]];
       var channel = event.data[0] & 0xf;
-      if (ccChannelMsg !== undefined) {
-        switch(ccChannelMsg[0]) {
-          case 128:
-            synth.keyboard.noteOff(event.data[1]);
-            break;
-          case 144:
-            synth.keyboard.noteOn(event.data[1], event.data[2]);
-            break;
-            case 176:
-              switch(event.data[1]) {
-                case 1:
-                  synth.prefPitchbend.push(event.data[2]);
-                  break;
-              }
-            break;
-          case 224:
-              var word = (event.data[2] << 7) | (event.data[1] & 0xf);
-              synth.prefPitchbend.bend(word);
-            break;
-        }
 
-        query('.midi-events').text(`${Midi.toText(event.data)}`);
-      }
-      else {
+      if (ccChannelMsg === undefined) {
         browser.console.info(`Unsupported midi ${event.data[0]} data=${event.data}`);
+        return;
       }
+
+      switch(ccChannelMsg[0]) {
+        case 128:
+          synth.keyboard.noteOff(event.data[1]);
+          break;
+        case 144:
+          synth.keyboard.noteOn(event.data[1], event.data[2]);
+          break;
+        case 176:
+          switch(event.data[1]) {
+            case 1:
+              synth.prefPitchbend.push(event.data[2]);
+              break;
+          }
+          break;
+        case 224:
+            var word = (event.data[2] << 7) | (event.data[1] & 0xf);
+            synth.prefPitchbend.bend(word);
+          break;
+      }
+
+      query('.midi-events').text(`${Midi.toText(event.data)}`);
     };
 
     window.addEventListener('load', function() {   
@@ -956,7 +957,7 @@
    *  Synth StepRotary
    */
 
-  class SynthStepRotary {
+  class SynthSteppedRotary {
     constructor(elem, stepValues = [-75, -45, -15, 15, 45, 75], sensitivity = 0.5) {
       if (elem === null || stepValues === null || sensitivity === null) {
         throw Error('Constructor parameters was null');
@@ -994,7 +995,7 @@
     }
   }
 
-  return SynthStepRotary;
+  return SynthSteppedRotary;
 }(window))),(window, (function(browser) {
   'use strict';
 
@@ -1049,10 +1050,10 @@
   'use strict';
 
   /*
-   *  Synth Rotary
+   *  Synth Free Rotary
    */
 
-  class SynthRotary {
+  class SynthFreeRotary {
     constructor(elem, sensitivity = 0.1) {
       if (elem === null || sensitivity === null) {
         throw Error('Constructor parameters was null');
@@ -1081,7 +1082,7 @@
     }
   }
 
-  return SynthRotary;
+  return SynthFreeRotary;
 }(window))),(window, (function(browser) {
   'use strict';
 
@@ -1219,12 +1220,16 @@
     }
 
     bend(velocity) {
-      var value = Math.abs(velocity - 8192) / 16383.0;
+      var value = Math.abs(velocity - 8192) / 8192.0;
       if (velocity < 8192) {
         this.elemPitchDown.attr('opacity', () => { return `${value}` });
       }
-      else {
+      else if (velocity > 8192) {
         this.elemPitchUp.attr('opacity', () => { return `${value}` });
+      }
+      else {
+        this.elemPitchUp.attr('opacity', () => { return `0.0` });
+        this.elemPitchDown.attr('opacity', () => { return `0.0` });
       }
     }
 
