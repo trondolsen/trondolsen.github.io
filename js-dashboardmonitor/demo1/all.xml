@@ -1,0 +1,907 @@
+<monitor>
+  <webview-name>Entire Network View</webview-name>
+  <webview-description>All Checks</webview-description>
+  <refreshtime>06.10.2017 10:32:38</refreshtime>
+  <check>
+    <comments></comments>
+    <id>10085</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Maintenance</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10087</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10088</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10089</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10090</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10091</id>
+    <displayname>SRV01.domain - Microsoft SQL Server 2014</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Success</result>
+    <type>MS SQL Server</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10096</id>
+    <displayname>SRV01.domain - Service &apos;W3SVC&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [World Wide Web Publishing Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10097</id>
+    <displayname>SRV01.domain - Service &apos;WAS&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Windows Process Activation Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10095</id>
+    <displayname>SRV01.domain - HTTP(s) /SRV-reportengine/Service.asmx</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Web site available, text pattern found in page</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Uncertain</result>
+    <type>HTTP/HTTPs</type>
+    <data>16</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10094</id>
+    <displayname>SRV01.domain - HTTP(s) /SRVweb/Login/Login.aspx</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Web site available, text pattern found in page</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Success</result>
+    <type>HTTP/HTTPs</type>
+    <data>31</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10092</id>
+    <displayname>SRV01.domain - Service &apos;W3SVC&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [World Wide Web Publishing Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10093</id>
+    <displayname>SRV01.domain - Service &apos;WAS&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Windows Process Activation Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10695</id>
+    <displayname>SRV01.domain - Event Log MSSQLSERVER</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Event not found</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Success</result>
+    <type>Event Log</type>
+    <data>0</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>106782</id>
+    <displayname>SRV01.domain - CPU Usage (all CPU&apos;s)</displayname>
+    <host>SRV01.domain</host>
+    <explanation>CPU usage=[50%], maximum allowed=[80%]</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Success</result>
+    <type>CPU Usage</type>
+    <data>50</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10064</id>
+    <displayname>SRV01.domain - Microsoft Active Directory</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\ActiveDirectory</folder>
+    <result>Success</result>
+    <type>MS Active Directory</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10065</id>
+    <displayname>SRV01.domain - Microsoft Active Directory</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\ActiveDirectory</folder>
+    <result>Success</result>
+    <type>MS Active Directory</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10139</id>
+    <displayname>SRV01.domain - DNS</displayname>
+    <host>SRV01.domain</host>
+    <explanation>DNS server queried, response string matched, response=[123.123.123.123 (A)]</explanation>
+    <folder>\SRV\ActiveDirectory</folder>
+    <result>Success</result>
+    <type>DNS</type>
+    <data>Not monitored</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10140</id>
+    <displayname>SRV01.domain - DNS</displayname>
+    <host>SRV01.domain</host>
+    <explanation>DNS server queried, response string matched, response=[123.123.123.123 (A)]</explanation>
+    <folder>\SRV\ActiveDirectory</folder>
+    <result>Success</result>
+    <type>DNS</type>
+    <data>Not monitored</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10227</id>
+    <displayname>SRV01.domain - Citrix XenApp Delivery Controller</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\Citrix</folder>
+    <result>Success</result>
+    <type>Citrix - XenApp</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10228</id>
+    <displayname>SRV01.domain - Citrix XenApp Delivery Controller</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\Citrix</folder>
+    <result>Success</result>
+    <type>Citrix - XenApp</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10270</id>
+    <displayname>SRV01.domain - Microsoft IIS 8.5 (part of Windows Server 2012 R2 / Windows 8.1)</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\Citrix</folder>
+    <result>Success</result>
+    <type>MS IIS Server</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10271</id>
+    <displayname>SRV01.domain - Microsoft IIS 8.5 (part of Windows Server 2012 R2 / Windows 8.1)</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\Citrix</folder>
+    <result>Success</result>
+    <type>MS IIS Server</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10059</id>
+    <displayname>SRV01.domain - Microsoft SQL Server 2014</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>MS SQL Server</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10678</id>
+    <displayname>SRV01.domain - CPU Usage (all CPU&apos;s)</displayname>
+    <host>SRV01.domain</host>
+    <explanation>CPU usage=[0%], maximum allowed=[80%]</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>CPU Usage</type>
+    <data>0</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10679</id>
+    <displayname>SRV01.domain - Memory Usage</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Available memory=[927 MB], minimum required=[500 MB]</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>Memory Usage</type>
+    <data>927</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10680</id>
+    <displayname>SRV01.domain - Microsoft SQL Server 2014</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>MS SQL Server</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10681</id>
+    <displayname>SRV01.domain - CPU Usage (all CPU&apos;s)</displayname>
+    <host>SRV01.domain</host>
+    <explanation>CPU usage=[15%], maximum allowed=[80%]</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>CPU Usage</type>
+    <data>15</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10682</id>
+    <displayname>SRV01.domain - Memory Usage</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Available memory=[640 MB], minimum required=[500 MB]</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>Memory Usage</type>
+    <data>640</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10683</id>
+    <displayname>SRV01.domain - Microsoft SQL Server 2012</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>MS SQL Server</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10684</id>
+    <displayname>SRV01.domain - CPU Usage (all CPU&apos;s)</displayname>
+    <host>SRV01.domain</host>
+    <explanation>CPU usage=[1%], maximum allowed=[80%]</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>CPU Usage</type>
+    <data>1</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10685</id>
+    <displayname>SRV01.domain - Memory Usage</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Available memory=[5745 MB], minimum required=[500 MB]</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>Memory Usage</type>
+    <data>5745</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10687</id>
+    <displayname>SRV01.domain - Memory Usage</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Available memory=[3213 MB], minimum required=[500 MB]</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>Memory Usage</type>
+    <data>3213</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10688</id>
+    <displayname>SRV01.domain - CPU Usage (all CPU&apos;s)</displayname>
+    <host>SRV01.domain</host>
+    <explanation>CPU usage=[1%], maximum allowed=[80%]</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>CPU Usage</type>
+    <data>1</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10697</id>
+    <displayname>SRV01.domain - Event Log MSSQLSERVER</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Event not found</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>Event Log</type>
+    <data>0</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10698</id>
+    <displayname>SRV01.domain - Event Log MSSQLSERVER</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Event not found</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>Event Log</type>
+    <data>0</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10704</id>
+    <displayname>SRV01.domain - Microsoft SQL Server 2014</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>MS SQL Server</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10705</id>
+    <displayname>SRV01.domain - Event Log MSSQLSERVER</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Event not found</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>Event Log</type>
+    <data>0</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10707</id>
+    <displayname>SRV01.domain - Event Log MSSQLSERVER</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Event not found</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Success</result>
+    <type>Event Log</type>
+    <data>0</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10131</id>
+    <displayname>SRV01.domain - DHCP low</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Event not found</explanation>
+    <folder>\SRV\DHCP</folder>
+    <result>Success</result>
+    <type>Event Log</type>
+    <data>0</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10133</id>
+    <displayname>SRV01.domain - DHCP low</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Event not found</explanation>
+    <folder>\SRV\DHCP</folder>
+    <result>Success</result>
+    <type>Event Log</type>
+    <data>0</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10134</id>
+    <displayname>SRV01.domain - Service &apos;DHCP Server&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [DHCP Server] has state: [Running]</explanation>
+    <folder>\SRV\DHCP</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10135</id>
+    <displayname>SRV01.domain - Service &apos;DHCP Server&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [DHCP Server] has state: [Running]</explanation>
+    <folder>\SRV\DHCP</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10530</id>
+    <displayname>SRV01.domain - DHCP low</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Event not found</explanation>
+    <folder>\SRV\DHCP</folder>
+    <result>Success</result>
+    <type>Event Log</type>
+    <data>0</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10523</id>
+    <displayname>SRV01.domain - Service&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 1</folder>
+    <result>Failed</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10524</id>
+    <displayname>SRV01.domain - Microsoft SQL Server 2014</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\Application 1</folder>
+    <result>Failed</result>
+    <type>MS SQL Server</type>
+    <data></data>
+  </check>
+  <check>
+    <comments>Down for 10d 13h</comments>
+    <id>10703</id>
+    <displayname>SRV01.domain - Event Log MSSQLSERVER</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Event found (131 events matched)</explanation>
+    <folder>\SRV\Application 1</folder>
+    <result>Failed</result>
+    <type>Event Log</type>
+    <data>131</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10532</id>
+    <displayname>SRV01.domain - DNS</displayname>
+    <host>SRV01.domain</host>
+    <explanation>DNS server queried, response string matched, response=[123.123.123.123 (A)]</explanation>
+    <folder>\SRV\DNS</folder>
+    <result>Success</result>
+    <type>DNS</type>
+    <data>Not monitored</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10533</id>
+    <displayname>SRV01.domain - DNS</displayname>
+    <host>SRV01.domain</host>
+    <explanation>DNS server queried, response string matched, response=[123.123.123.123 (A)]</explanation>
+    <folder>\SRV\DNS</folder>
+    <result>Success</result>
+    <type>DNS</type>
+    <data>Not monitored</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10585</id>
+    <displayname>SRV01.domain - domain.com - HTTP(s)</displayname>
+    <host>domain.com</host>
+    <explanation>Web site available, text pattern found in page</explanation>
+    <folder>\SRV\Application 8</folder>
+    <result>Success</result>
+    <type>HTTP/HTTPs</type>
+    <data>109</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10589</id>
+    <displayname>SRV01.domain - Microsoft SQL Server 2014</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\Application 8</folder>
+    <result>Success</result>
+    <type>MS SQL Server</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10592</id>
+    <displayname>SRV01.domain - Service &apos;IIS Admin Service&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [IIS Admin Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 8</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10701</id>
+    <displayname>SRV01.domain - Event Log MSSQLSERVER</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Event not found</explanation>
+    <folder>\SRV\Application 8</folder>
+    <result>Success</result>
+    <type>Event Log</type>
+    <data>0</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10625</id>
+    <displayname>SRV01.domain - ICMP Ping</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Reply from SRV01.domain, time=[0ms], TTL=[64]</explanation>
+    <folder>\SRV\Application 9</folder>
+    <result>Success</result>
+    <type>ICMP Ping</type>
+    <data>0</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10629</id>
+    <displayname>SRV01.domain - Service &apos;SMS Agent Host&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [SMS Agent Host] has state: [Running]</explanation>
+    <folder>\SRV\SCCM</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10630</id>
+    <displayname>SRV01.domain - Service &apos;SMS_EXECUTIVE&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>On Hold</explanation>
+    <folder>\SRV\SCCM</folder>
+    <result>On Hold</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10631</id>
+    <displayname>SRV01.domain - Service &apos;SMS_NOTIFICATION_SERVER&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [SMS_NOTIFICATION_SERVER] has state: [Running]</explanation>
+    <folder>\SRV\SCCM</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10632</id>
+    <displayname>SRV01.domain - Service &apos;SMS_SITE_COMPONENT_MANAGER&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>On Hold</explanation>
+    <folder>\SRV\SCCM</folder>
+    <result>On Hold</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10633</id>
+    <displayname>SRV01.domain - Service &apos;SMS_SITE_SQL_BACKUP&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [SMS_SITE_SQL_BACKUP] has state: [Running]</explanation>
+    <folder>\SRV\SCCM</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10634</id>
+    <displayname>SRV01.domain - Service &apos;SMS_SITE_VSS_WRITER&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [SMS_SITE_VSS_WRITER] has state: [Running]</explanation>
+    <folder>\SRV\SCCM</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10635</id>
+    <displayname>SRV01.domain - Microsoft SQL Server 2014</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\SCCM</folder>
+    <result>Success</result>
+    <type>MS SQL Server</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10636</id>
+    <displayname>SRV01.domain - Microsoft IIS 8.5</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\SCCM</folder>
+    <result>Success</result>
+    <type>MS IIS Server</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10638</id>
+    <displayname>SRV01.domain - Service &apos;SMS Agent Host&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [SMS Agent Host] has state: [Running]</explanation>
+    <folder>\SRV\SCCM</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10650</id>
+    <displayname>SRV01.domain - Microsoft IIS 8.5</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\SCCM</folder>
+    <result>Success</result>
+    <type>MS IIS Server</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10706</id>
+    <displayname>SRV01.domain - Event Log MSSQLSERVER</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Event not found</explanation>
+    <folder>\SRV\SCCM</folder>
+    <result>Success</result>
+    <type>Event Log</type>
+    <data>0</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10659</id>
+    <displayname>SRV01.domain - Service &apos;IAS&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Network Policy Server] has state: [Running]</explanation>
+    <folder>\SRV\Radius</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10661</id>
+    <displayname>SRV01.domain - Service &apos;IAS&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Network Policy Server] has state: [Running]</explanation>
+    <folder>\SRV\Radius</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10663</id>
+    <displayname>SRV01.domain - Microsoft SQL Server 2014</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service(s) running: Service (Service)</explanation>
+    <folder>\SRV\Application 2</folder>
+    <result>Success</result>
+    <type>MS SQL Server</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10664</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 2</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10665</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 2</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10666</id>
+    <displayname>domain.com - HTTP(s)</displayname>
+    <host>domain.com</host>
+    <explanation>Web site available, text pattern found in page</explanation>
+    <folder>\SRV\Application 2</folder>
+    <result>Success</result>
+    <type>HTTP/HTTPs</type>
+    <data>0</data>
+  </check>
+  <check>
+    <comments>Down for 9d 20h</comments>
+    <id>10702</id>
+    <displayname>SRV01.domain - Event Log MSSQLSERVER</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Event found (131 events matched)</explanation>
+    <folder>\SRV\Application 2</folder>
+    <result>Failed</result>
+    <type>Event Log</type>
+    <data>131</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10737</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [domain.com] has state: [Running]</explanation>
+    <folder>\SRV\Application 10</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10738</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [domain.com] has state: [Running]</explanation>
+    <folder>\SRV\Application 10</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10739</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [domain.com] has state: [Running]</explanation>
+    <folder>\SRV\Application 10</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10160</id>
+    <displayname>123.123.123.123 - Service</displayname>
+    <host>123.123.123.123</host>
+    <explanation>On Hold</explanation>
+    <folder>\SRV\Application 11</folder>
+    <result>On Hold</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10161</id>
+    <displayname>123.123.123.123 - Service &apos;DNS Server&apos;</displayname>
+    <host>123.123.123.123</host>
+    <explanation>On Hold</explanation>
+    <folder>\SRV\Application 11</folder>
+    <result>On Hold</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10230</id>
+    <displayname>123.123.123.123 - CheckDhcpMinAvailable(...)</displayname>
+    <host></host>
+    <explanation>On Hold</explanation>
+    <folder>\SRV\Application 11</folder>
+    <result>On Hold</result>
+    <type>VBScript - CheckDhcpMinAvailable</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10727</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 6</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10728</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 6</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10729</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 6</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10731</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 6</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10732</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 6</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+</monitor>

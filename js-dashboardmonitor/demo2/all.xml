@@ -1,0 +1,71 @@
+<monitor>
+  <webview-name>Entire Network View</webview-name>
+  <webview-description>All Checks</webview-description>
+  <refreshtime>06.10.2017 10:32:38</refreshtime>
+  <check>
+    <comments></comments>
+    <id>10084</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10086</id>
+    <displayname>SRV01.domain - Service</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [Service] has state: [Running]</explanation>
+    <folder>\SRV\Application 3</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10525</id>
+    <displayname>domain.com - HTTP(s)</displayname>
+    <host>domain.com</host>
+    <explanation>Web site available, text pattern found in page</explanation>
+    <folder>\SRV\Application 1</folder>
+    <result>Failed</result>
+    <type>HTTP/HTTPs</type>
+    <data>31</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10581</id>
+    <displayname>SRV01.domain - TCP/IP port 8530</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Server is available</explanation>
+    <folder>\SRV\WSUS</folder>
+    <result>Success</result>
+    <type>TCP/IP</type>
+    <data>15</data>
+  </check>
+  <check>
+    <comments></comments>
+    <id>10637</id>
+    <displayname>SRV01.domain - Service &apos;WsusService&apos;</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Service [WSUS Service] has state: [Running]</explanation>
+    <folder>\SRV\SCCM</folder>
+    <result>Success</result>
+    <type>Service</type>
+    <data></data>
+  </check>
+  <check>
+    <comments>Down for 10d 13h</comments>
+    <id>10700</id>
+    <displayname>SRV01.domain - Event Log MSSQLSERVER</displayname>
+    <host>SRV01.domain</host>
+    <explanation>Event found (131 events matched)</explanation>
+    <folder>\SRV\Database</folder>
+    <result>Failed</result>
+    <type>Event Log</type>
+    <data>131</data>
+  </check>
+</monitor>
